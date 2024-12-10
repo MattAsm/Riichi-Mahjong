@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6198526bcb23f9444ac3984249d7dc6f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21326
+  packageName: Mahjong Tiles Pack
+  packageVersion: 1.0.0
+  assetPath: Assets/MahjongTiles/Prefabs/Dots/Dot_8.prefab
+  uploadId: 10573

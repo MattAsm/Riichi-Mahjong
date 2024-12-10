@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6afb35567cc9f7d42a0c8c3872617651
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21326
+  packageName: Mahjong Tiles Pack
+  packageVersion: 1.0.0
+  assetPath: Assets/MahjongTiles/Prefabs/Dice.prefab
+  uploadId: 10573

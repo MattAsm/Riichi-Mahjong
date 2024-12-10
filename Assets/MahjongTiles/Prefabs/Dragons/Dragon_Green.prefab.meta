@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b457c80453d16034daf74477e64e18a6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21326
+  packageName: Mahjong Tiles Pack
+  packageVersion: 1.0.0
+  assetPath: Assets/MahjongTiles/Prefabs/Dragons/Dragon_Green.prefab
+  uploadId: 10573

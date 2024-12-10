@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8240b02ac31743e479ae662a5d5d5e12
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21326
+  packageName: Mahjong Tiles Pack
+  packageVersion: 1.0.0
+  assetPath: Assets/MahjongTiles/Prefabs/Dragons/Dragon_Blank.prefab
+  uploadId: 10573

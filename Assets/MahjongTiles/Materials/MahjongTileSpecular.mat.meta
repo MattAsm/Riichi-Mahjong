@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8d903341439310d44b7ed491b5be6367
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 21326
+  packageName: Mahjong Tiles Pack
+  packageVersion: 1.0.0
+  assetPath: Assets/MahjongTiles/Materials/MahjongTileSpecular.mat
+  uploadId: 10573
