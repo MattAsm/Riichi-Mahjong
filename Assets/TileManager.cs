@@ -145,7 +145,6 @@ public class TileManager : MonoBehaviour {
 
     void Shuffle()
     {
-        //This needs to be changed to account for list instead of an array
         for (int i = TileWall.Count - 1; i > 0; i--)
         {
             int j = UnityEngine.Random.Range(0, i + 1);
