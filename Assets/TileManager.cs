@@ -17,12 +17,20 @@ public class TileManager : MonoBehaviour {
     public List<Tile> UraDora; //The Hidden (Ura) Dora
     public List<Tile> KanTiles; //Draw from these when calling a CLOSED Kan... not used for open Kan!!!
 
-    public List<Tile> Hand; //Debugging... might move where the hand is located later
-    public List<Tile> DiscardPile; //Discard Pile... where you discard tiles...
+    [Tooltip("East Seat on Turn 1")]
+    public List<Tile> P1Hand; //The players hand...
+    [Tooltip("South Seat on Turn 1")]
+    public List<Tile> P2Hand;
+    [Tooltip("West Seat on Turn 1")]
+    public List<Tile> P3Hand;
+    [Tooltip("North Seat on Turn 1")]
+    public List<Tile> P4Hand;
+
+    public List<Tile> DiscardPile; //Still in debugging phase... Discard Pile... where you discard tiles...
 
     public GameObject[] TilePrefabs;
-    public float xPosition;
-    public float yPosition;
+    public float xPosition; //Both these are not being used right now :(
+    public float yPosition; //Can probably find a use for them with hand placements... maybe
 
     //Below is used to setup where the Dora will be places to align it with the camera!
     public GameObject DoraPlacement1;
@@ -49,12 +57,14 @@ public class TileManager : MonoBehaviour {
         CreateDeadWall();
         MoveDoraTiles();
 
+        MakeHand();
+
         //Anything below is for debugging purposes
         //Hand.Add(DrawTiles(TileWall)); //Example of drawing to hand when I create turns
         //DiscardTiles(Tile, Hand, DiscardPile); //Example of discarding... Both this and drawing happens in 1 turn unless a callout was made
 
-     //   MakeHandDebug();
-     //   DrawAndDiscardDebug();
+
+        //   DrawAndDiscardDebug();
         DebuggingTest();
     }
 
@@ -180,6 +190,30 @@ public class TileManager : MonoBehaviour {
 
     }
 
+    void MakeHand()
+    {
+        P1Hand = new List<Tile>();
+        for (int x = 0; x < 13; x++)
+        {
+            P1Hand.Add(DrawTiles(TileWall));
+        }
+        P2Hand = new List<Tile>();
+        for (int x = 0; x < 13; x++)
+        {
+            P2Hand.Add(DrawTiles(TileWall));
+        }
+        P3Hand = new List<Tile>();
+        for (int x = 0; x < 13; x++)
+        {
+            P3Hand.Add(DrawTiles(TileWall));
+        }
+        P4Hand = new List<Tile>();
+        for (int x = 0; x < 13; x++)
+        {
+            P4Hand.Add(DrawTiles(TileWall));
+        }
+    }
+
     public Tile DrawTiles(List<Tile> wall) //This method will be reused for both player and A.I. interactions, to be implemented in Phase 2.
     {
         if(wall.Count == 0) 
@@ -199,18 +233,8 @@ public class TileManager : MonoBehaviour {
             discardPile.Add(tile);
         }
     }
-
+   
     /*
-    void MakeHandDebug() //The Code Works :)
-    {
-        Hand = new List<Tile>();
-        for (int x = 0; x < 13; x++)
-        {
-            Hand.Add(DrawTiles(TileWall));
-            UnityEngine.Debug.Log("Added to hand: " + Hand[x]);
-        }
-    }
-
     void DrawAndDiscardDebug() //The Code Works :)
     {
         Hand.Add(DrawTiles(TileWall));
