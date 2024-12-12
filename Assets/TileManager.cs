@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine.XR;
 using UnityEditor.SceneManagement;
+using System.Linq;
 
 public class TileManager : MonoBehaviour {
 
@@ -186,32 +187,53 @@ public class TileManager : MonoBehaviour {
         Dora[2].transform.position = DoraPlacement3.transform.position;
         Dora[3].transform.position = DoraPlacement4.transform.position;
         Dora[4].transform.position = DoraPlacement5.transform.position;
-
     }
 
     void MakeHand()
     {
+        //Player 1's Hand
         P1Hand = new List<Tile>();
         for (int x = 0; x < 13; x++)
         {
             P1Hand.Add(DrawTiles(TileWall));
         }
+        SortHand(P1Hand);
+
+        //Player 2's Hand
         P2Hand = new List<Tile>();
         for (int x = 0; x < 13; x++)
         {
             P2Hand.Add(DrawTiles(TileWall));
         }
+        SortHand(P2Hand);
+
+        //Player 3's Hand
         P3Hand = new List<Tile>();
         for (int x = 0; x < 13; x++)
         {
             P3Hand.Add(DrawTiles(TileWall));
         }
+        SortHand(P3Hand);
+
+        //Player 4's Hand
         P4Hand = new List<Tile>();
         for (int x = 0; x < 13; x++)
         {
             P4Hand.Add(DrawTiles(TileWall));
         }
+        SortHand(P4Hand);
     }
+
+    public void SortHand(List<Tile> Hands)
+    {
+        var sortedHand = Hands.OrderBy(Tile => Tile.Suit).ThenBy(Tile => Tile.Value).ToList();
+        Hands.Clear();
+        //Manually refilling the hand
+        for (int x = 0; x < sortedHand.Count; x++)
+        {
+            Hands.Add(sortedHand[x]);
+        }
+    }//Sorts Hand.... Initializing this at start but add as a button later to re-sort if player manually sorts and changes mind.
 
     public Tile DrawTiles(List<Tile> wall) //This method will be reused for both player and A.I. interactions, to be implemented in Phase 2.
     {
@@ -240,7 +262,7 @@ public class TileManager : MonoBehaviour {
         DiscardTiles(Hand[3], Hand, DiscardPile);
         UnityEngine.Debug.Log("Removed from hand: " + Hand[3]);
     }
-    */ //Make Hand, Draw and Discard examples
+    */ //Draw and Discard examples
     void DebuggingTest()
     {
         /*   for(int x = 0; x < TileWall.Count; x++)
