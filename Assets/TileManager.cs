@@ -27,11 +27,11 @@ public class TileManager : MonoBehaviour {
     [Tooltip("North Seat on Turn 1")]
     public List<Tile> P4Hand;
 
+    public GameObject handLocation;
+
     public List<Tile> DiscardPile; //Still in debugging phase... Discard Pile... where you discard tiles...
 
     public GameObject[] TilePrefabs;
-    public float xPosition; //Both these are not being used right now :(
-    public float yPosition; //Can probably find a use for them with hand placements... maybe
 
     //Below is used to setup where the Dora will be places to align it with the camera!
     public GameObject DoraPlacement1;
@@ -189,8 +189,9 @@ public class TileManager : MonoBehaviour {
         Dora[4].transform.position = DoraPlacement5.transform.position;
     }
 
-    void MakeHand()
+    void MakeHand() //And Set hands at table
     {
+        int y = 0;
         //Player 1's Hand
         P1Hand = new List<Tile>();
         for (int x = 0; x < 13; x++)
@@ -199,6 +200,13 @@ public class TileManager : MonoBehaviour {
         }
         SortHand(P1Hand);
 
+        for(int x = 0; x < P1Hand.Count; x++)
+        {
+            P1Hand[x].transform.rotation = handLocation.transform.rotation;
+            P1Hand[x].transform.position = handLocation.transform.position + new Vector3(y, 0, 0);
+            y += 9;
+        }
+        y = 0;
         //Player 2's Hand
         P2Hand = new List<Tile>();
         for (int x = 0; x < 13; x++)
