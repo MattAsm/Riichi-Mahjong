@@ -27,11 +27,10 @@ public class TileManager : MonoBehaviour {
     [Tooltip("North Seat on Turn 1")]
     public List<Tile> P4Hand;
 
-    public GameObject handLocation;
-
     public List<Tile> DiscardPile; //Still in debugging phase... Discard Pile... where you discard tiles...
 
     public GameObject[] TilePrefabs;
+    private Dictionary<string, GameObject> tilePrefabMap;
 
     //Below is used to setup where the Dora will be places to align it with the camera!
     public GameObject DoraPlacement1;
@@ -40,7 +39,10 @@ public class TileManager : MonoBehaviour {
     public GameObject DoraPlacement4;
     public GameObject DoraPlacement5;
 
-    private Dictionary<string, GameObject> tilePrefabMap;
+    public GameObject handLocation;
+    public GameObject handLocation2;
+    public GameObject handLocation3;
+    public GameObject handLocation4;
 
     private void Awake()
     {
@@ -49,7 +51,6 @@ public class TileManager : MonoBehaviour {
             Destroy(gameObject); // Prevent duplicates
             return;
         }
-
         Instance = this;
         DontDestroyOnLoad(gameObject); // Keeps this code when scenes change... Remove if I dont need it in every scene
 
@@ -57,7 +58,6 @@ public class TileManager : MonoBehaviour {
         InitializeWall();
         CreateDeadWall();
         MoveDoraTiles();
-
         MakeHand();
 
         //Anything below is for debugging purposes
@@ -192,6 +192,7 @@ public class TileManager : MonoBehaviour {
     void MakeHand() //And Set hands at table
     {
         int y = 0;
+
         //Player 1's Hand
         P1Hand = new List<Tile>();
         for (int x = 0; x < 13; x++)
@@ -199,7 +200,6 @@ public class TileManager : MonoBehaviour {
             P1Hand.Add(DrawTiles(TileWall));
         }
         SortHand(P1Hand);
-
         for(int x = 0; x < P1Hand.Count; x++)
         {
             P1Hand[x].transform.rotation = handLocation.transform.rotation;
@@ -207,6 +207,7 @@ public class TileManager : MonoBehaviour {
             y += 9;
         }
         y = 0;
+
         //Player 2's Hand
         P2Hand = new List<Tile>();
         for (int x = 0; x < 13; x++)
@@ -214,6 +215,13 @@ public class TileManager : MonoBehaviour {
             P2Hand.Add(DrawTiles(TileWall));
         }
         SortHand(P2Hand);
+        for (int x = 0; x < P2Hand.Count; x++)
+        {
+            P2Hand[x].transform.rotation = handLocation2.transform.rotation;
+            P2Hand[x].transform.position = handLocation2.transform.position + new Vector3(0, 0, y);
+            y += 9;
+        }
+        y = 0;
 
         //Player 3's Hand
         P3Hand = new List<Tile>();
@@ -222,6 +230,13 @@ public class TileManager : MonoBehaviour {
             P3Hand.Add(DrawTiles(TileWall));
         }
         SortHand(P3Hand);
+        for (int x = 0; x < P3Hand.Count; x++)
+        {
+            P3Hand[x].transform.rotation = handLocation3.transform.rotation;
+            P3Hand[x].transform.position = handLocation3.transform.position + new Vector3(-y, 0, 0);
+            y += 9;
+        }
+        y = 0;
 
         //Player 4's Hand
         P4Hand = new List<Tile>();
@@ -230,6 +245,13 @@ public class TileManager : MonoBehaviour {
             P4Hand.Add(DrawTiles(TileWall));
         }
         SortHand(P4Hand);
+        for (int x = 0; x < P4Hand.Count; x++)
+        {
+            P4Hand[x].transform.rotation = handLocation4.transform.rotation;
+            P4Hand[x].transform.position = handLocation4.transform.position + new Vector3(0, 0, -y);
+            y += 9;
+        }
+        y = 0;
     }
 
     public void SortHand(List<Tile> Hands)
