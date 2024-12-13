@@ -1,49 +1,65 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngineInternal;
 
 public class PlayerScript : MonoBehaviour
 {
     public LayerMask draggableObject;
     public GameObject selectedObject;
 
-    bool isDragging;
+    private bool isOutlineOff = true;
 
-// Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isDragging = false;
+        selectedObject = null;
     }
 
- // Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-         RaycastHit hit;
 
-            if (Physics.Raycast(ray.origin, ray.direction, out hit,Mathf.Infinity, draggableObject))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, draggableObject))
+        {
+            GameObject hitObject = hit.collider.gameObject;
+
+            if (isOutlineOff || hitObject != selectedObject)
             {
-                selectedObject = hit.collider.gameObject;
-                isDragging = true;
+                // Turn off the outline for the previously selected object, if any
+                if (selectedObject != null)
+                {
+                    var outline = selectedObject.GetComponent<Outline>();
+                    if (outline != null)
+                    { outline.enabled = false; }
+                }
+
+                // Update the selected object
+                selectedObject = hitObject;
+
+                // Enable the outline for the currently selected object
+                var newOutline = selectedObject.GetComponent<Outline>();
+                if (newOutline != null)
+                { newOutline.enabled = true; }
+
+                isOutlineOff = false; // Outline is now on
             }
         }
-
-        if (isDragging == true)
+        else if (!isOutlineOff)
         {
-            Vector3 pos = mousePos();
-            selectedObject.transform.position = pos;
-        }
+            // Turn off the outline for the previously selected object
+            if (selectedObject != null)
+            {
+                var outline = selectedObject.GetComponent<Outline>();
+                if (outline != null)
+                    outline.enabled = false;
 
-        if(Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
+                selectedObject = null; // No object is selected now
+            }
+
+            isOutlineOff = true; // Outline is now off
         }
     }
-
-    Vector3 mousePos()
-    {
-        return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 97));
-    }
-
 }
