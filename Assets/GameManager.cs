@@ -8,12 +8,9 @@ public class GameManager : MonoBehaviour {
 
     public int PlayerScore { get; private set; }
 
-    //Check if below is necessary, research says it isn't
-    //public string Suit { get; set; }
-    //public int Value { get; set; }
-    //public bool IsRedFive { get; set; }
+    private bool isPlayerTurn;
 
-
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -25,11 +22,11 @@ public class GameManager : MonoBehaviour {
         Instance = this;
         DontDestroyOnLoad(gameObject); // Keeps this code when scenes change
     }
-/*   ADD WHEN NECESSARY
+
     public void AddScore(int points)
     {
         PlayerScore += points;
-        Debug.Log($"Score updated: {PlayerScore}");
+        UnityEngine.Debug.Log($"Score updated: {PlayerScore}");
     }
-*///    ADD WHEN NECESSARY
+
 }
