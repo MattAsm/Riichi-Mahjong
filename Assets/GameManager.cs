@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public int PlayerScore { get; private set; }
 
-    private bool isPlayerTurn;
+    public bool isPlayerTurn;
 
     
     private void Awake()

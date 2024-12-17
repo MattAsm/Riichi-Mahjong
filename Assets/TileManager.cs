@@ -189,7 +189,7 @@ public class TileManager : MonoBehaviour {
         Dora[4].transform.position = DoraPlacement5.transform.position;
     }
 
-    void MakeHand() //And Set hands at table
+    public void MakeHand() //And Set hands at table
     {
         int y = 0;
 
