@@ -18,14 +18,8 @@ public class TileManager : MonoBehaviour {
     public List<Tile> UraDora; //The Hidden (Ura) Dora
     public List<Tile> KanTiles; //Draw from these when calling a CLOSED Kan... not used for open Kan!!!
 
-    [Tooltip("East Seat on Turn 1")]
-    public List<Tile> P1Hand; //The players hand...
-    [Tooltip("South Seat on Turn 1")]
-    public List<Tile> P2Hand;
-    [Tooltip("West Seat on Turn 1")]
-    public List<Tile> P3Hand;
-    [Tooltip("North Seat on Turn 1")]
-    public List<Tile> P4Hand;
+    public List<Tile> newHand; //The players hand...
+   
 
     public List<Tile> DiscardPile; //Still in debugging phase... Discard Pile... where you discard tiles...
 
@@ -189,69 +183,24 @@ public class TileManager : MonoBehaviour {
         Dora[4].transform.position = DoraPlacement5.transform.position;
     }
 
-    public void MakeHand() //And Set hands at table
+    public List<Tile> MakeHand() //And Set hands at table
     {
         int y = 0;
 
-        //Player 1's Hand
-        P1Hand = new List<Tile>();
+        newHand = new List<Tile>();
         for (int x = 0; x < 13; x++)
         {
-            P1Hand.Add(DrawTiles(TileWall));
+            newHand.Add(DrawTiles(TileWall));
         }
-        SortHand(P1Hand);
-        for(int x = 0; x < P1Hand.Count; x++)
+        SortHand(newHand);
+        for (int x = 0; x < newHand.Count; x++)
         {
-            P1Hand[x].transform.rotation = handLocation.transform.rotation;
-            P1Hand[x].transform.position = handLocation.transform.position + new Vector3(y, 0, 0);
+            newHand[x].transform.rotation = handLocation.transform.rotation;
+            newHand[x].transform.position = handLocation.transform.position + new Vector3(y, 0, 0);
             y += 9;
         }
         y = 0;
-
-        //Player 2's Hand
-        P2Hand = new List<Tile>();
-        for (int x = 0; x < 13; x++)
-        {
-            P2Hand.Add(DrawTiles(TileWall));
-        }
-        SortHand(P2Hand);
-        for (int x = 0; x < P2Hand.Count; x++)
-        {
-            P2Hand[x].transform.rotation = handLocation2.transform.rotation;
-            P2Hand[x].transform.position = handLocation2.transform.position + new Vector3(0, 0, y);
-            y += 9;
-        }
-        y = 0;
-
-        //Player 3's Hand
-        P3Hand = new List<Tile>();
-        for (int x = 0; x < 13; x++)
-        {
-            P3Hand.Add(DrawTiles(TileWall));
-        }
-        SortHand(P3Hand);
-        for (int x = 0; x < P3Hand.Count; x++)
-        {
-            P3Hand[x].transform.rotation = handLocation3.transform.rotation;
-            P3Hand[x].transform.position = handLocation3.transform.position + new Vector3(-y, 0, 0);
-            y += 9;
-        }
-        y = 0;
-
-        //Player 4's Hand
-        P4Hand = new List<Tile>();
-        for (int x = 0; x < 13; x++)
-        {
-            P4Hand.Add(DrawTiles(TileWall));
-        }
-        SortHand(P4Hand);
-        for (int x = 0; x < P4Hand.Count; x++)
-        {
-            P4Hand[x].transform.rotation = handLocation4.transform.rotation;
-            P4Hand[x].transform.position = handLocation4.transform.position + new Vector3(0, 0, -y);
-            y += 9;
-        }
-        y = 0;
+        return newHand;
     }
 
     public void SortHand(List<Tile> Hands)
