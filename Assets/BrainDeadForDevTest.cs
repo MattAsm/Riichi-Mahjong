@@ -14,9 +14,7 @@ public class BrainDeadForDevTest : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        var theScript = tileManager.GetComponent<TileManager>();
-        hand = theScript.gameObject.GetComponent<TileManager>().MakeHand();
-        Debug.Log(hand.Count);
+        GetHand();
     }
 
     // Update is called once per frame
@@ -29,6 +27,23 @@ public class BrainDeadForDevTest : MonoBehaviour
         }
     */
     }
+
+    private void GetHand()
+    {
+        var theScript = tileManager.GetComponent<TileManager>();
+        hand = theScript.gameObject.GetComponent<TileManager>().MakeHand();
+        int y = -60;
+        for (int x = 0; x < hand.Count; x++)
+        {            
+            hand[x].transform.parent = this.transform;
+            hand[x].transform.localPosition = Vector3.zero;
+            hand[x].transform.localRotation = Quaternion.identity;
+
+            hand[x].transform.localRotation *= Quaternion.Euler(-90, 0, 0);
+            hand[x].transform.localPosition += new Vector3(y, -3.2f, 70);
+            y += 9;
+        }
+    } //Gets hand from TileManager. Makes tiles Child of object the script is attached to and sets them based on Seat Orientation
 
     public void turn()
     {

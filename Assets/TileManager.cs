@@ -33,11 +33,6 @@ public class TileManager : MonoBehaviour {
     public GameObject DoraPlacement4;
     public GameObject DoraPlacement5;
 
-    public GameObject handLocation;
-    public GameObject handLocation2;
-    public GameObject handLocation3;
-    public GameObject handLocation4;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -52,7 +47,8 @@ public class TileManager : MonoBehaviour {
         InitializeWall();
         CreateDeadWall();
         MoveDoraTiles();
-        MakeHand();
+
+        //MakeHand();  Now Takes Place In Everyones Own Script
 
         //Anything below is for debugging purposes
         //Hand.Add(DrawTiles(TileWall)); //Example of drawing to hand when I create turns
@@ -185,21 +181,13 @@ public class TileManager : MonoBehaviour {
 
     public List<Tile> MakeHand() //And Set hands at table
     {
-        int y = 0;
-
         newHand = new List<Tile>();
         for (int x = 0; x < 13; x++)
         {
             newHand.Add(DrawTiles(TileWall));
         }
         SortHand(newHand);
-        for (int x = 0; x < newHand.Count; x++)
-        {
-            newHand[x].transform.rotation = handLocation.transform.rotation;
-            newHand[x].transform.position = handLocation.transform.position + new Vector3(y, 0, 0);
-            y += 9;
-        }
-        y = 0;
+        
         return newHand;
     }
 
