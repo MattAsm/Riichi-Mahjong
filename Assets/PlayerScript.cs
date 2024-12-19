@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject selectedObject;
 
     private bool isOutlineOff = true;
+    public bool playersTurn = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,10 +30,10 @@ public class PlayerScript : MonoBehaviour
     {
        ObjectGlow();
 
-        if (playerNumber == 10)
+        if (playersTurn)
         {
-            playerNumber = 0;
-            turn();
+            playersTurn = false;
+            turn();      
         }
     }
 
@@ -102,6 +103,7 @@ public class PlayerScript : MonoBehaviour
     public void turn()
     {
         AddTile();
+        DiscardTile();
     }
 
     void AddTile()
@@ -112,7 +114,20 @@ public class PlayerScript : MonoBehaviour
 
     void DiscardTile()
     {
-        var theScript = tileManager.GetComponent<TileManager>();
-     //   hand.Add(theScript.gameObject.GetComponent<TileManager>().DiscardTiles()); //Tile tile, List<Tile> hand, List<Tile> discardPile
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, draggableObject))
+        {
+            GameObject hitObject = hit.collider.gameObject;
+            hitObject = selectedObject;
+
+            if (Input.GetKey(KeyCode.Mouse0) && hitObject.transform.parent == this.transform && hitObject != null)
+            {
+                Debug.Log("Tile Discarded: ");
+                var theScript = tileManager.GetComponent<TileManager>();
+                //   hand.Add(theScript.gameObject.GetComponent<TileManager>().DiscardTiles()); //Tile tile, List<Tile> hand, List<Tile> discardPile
+                return;
+            }
+        }
     }
 }

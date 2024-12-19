@@ -9,6 +9,7 @@ public class BrainDeadForDevTest : MonoBehaviour
     public GameObject tileManager;
 
     public int playerNumber;
+    public bool playersTurn = false;
     public List<Tile> hand;
 
     public bool handMade = false;
@@ -21,16 +22,16 @@ public class BrainDeadForDevTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    /*    
-         if(GetComponent<GameManager>().isPlayerTurn == true)
-        {
-            turn();
-        }
-    */
+        /*    
+             if(GetComponent<GameManager>().isPlayerTurn == true)
+            {
+                turn();
+            }
+        */
 
-        if(playerNumber == 10)
+        if (playersTurn)
         {
-            playerNumber = 0;
+            playersTurn = false;
             turn();
         }
     }
@@ -55,6 +56,7 @@ public class BrainDeadForDevTest : MonoBehaviour
     public void turn()
     {
         AddTile();
+        DiscardTile();
     }
 
     void AddTile()
@@ -66,6 +68,6 @@ public class BrainDeadForDevTest : MonoBehaviour
     void DiscardTile()
     {
         var theScript = tileManager.GetComponent<TileManager>();
-     //   hand.Add(theScript.gameObject.GetComponent<TileManager>().DiscardTiles()); //Tile tile, List<Tile> hand, List<Tile> discardPile
+        //hand.Remove(theScript.gameObject.GetComponent<TileManager>().DiscardTiles()); //Tile tile, List<Tile> hand, List<Tile> discardPile
     }
 }
