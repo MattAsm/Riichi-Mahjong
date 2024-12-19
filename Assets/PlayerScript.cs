@@ -6,6 +6,8 @@ using UnityEngineInternal;
 
 public class PlayerScript : MonoBehaviour
 {
+    public int playerNumber = 1;
+
     public GameObject tileManager;
     public List<Tile> hand;
 
@@ -26,6 +28,12 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
        ObjectGlow();
+
+        if (playerNumber == 10)
+        {
+            playerNumber = 0;
+            turn();
+        }
     }
 
    private void GetHand()
@@ -89,5 +97,22 @@ public class PlayerScript : MonoBehaviour
 
             isOutlineOff = true; // Outline is now off
         }
+    }
+
+    public void turn()
+    {
+        AddTile();
+    }
+
+    void AddTile()
+    {
+        var theScript = tileManager.GetComponent<TileManager>();
+        hand.Add(theScript.gameObject.GetComponent<TileManager>().DrawTiles());
+    }
+
+    void DiscardTile()
+    {
+        var theScript = tileManager.GetComponent<TileManager>();
+     //   hand.Add(theScript.gameObject.GetComponent<TileManager>().DiscardTiles()); //Tile tile, List<Tile> hand, List<Tile> discardPile
     }
 }

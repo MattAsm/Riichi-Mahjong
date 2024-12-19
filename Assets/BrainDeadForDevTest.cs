@@ -10,6 +10,7 @@ public class BrainDeadForDevTest : MonoBehaviour
 
     public int playerNumber;
     public List<Tile> hand;
+
     public bool handMade = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +27,12 @@ public class BrainDeadForDevTest : MonoBehaviour
             turn();
         }
     */
+
+        if(playerNumber == 10)
+        {
+            playerNumber = 0;
+            turn();
+        }
     }
 
     private void GetHand()
@@ -47,6 +54,18 @@ public class BrainDeadForDevTest : MonoBehaviour
 
     public void turn()
     {
-       // GetComponent<TileManager>().DrawTiles();
+        AddTile();
+    }
+
+    void AddTile()
+    {
+        var theScript = tileManager.GetComponent<TileManager>();
+        hand.Add(theScript.gameObject.GetComponent<TileManager>().DrawTiles());
+    }
+
+    void DiscardTile()
+    {
+        var theScript = tileManager.GetComponent<TileManager>();
+     //   hand.Add(theScript.gameObject.GetComponent<TileManager>().DiscardTiles()); //Tile tile, List<Tile> hand, List<Tile> discardPile
     }
 }

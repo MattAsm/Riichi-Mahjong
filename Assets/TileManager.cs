@@ -184,7 +184,7 @@ public class TileManager : MonoBehaviour {
         newHand = new List<Tile>();
         for (int x = 0; x < 13; x++)
         {
-            newHand.Add(DrawTiles(TileWall));
+            newHand.Add(DrawTiles());
         }
         SortHand(newHand);
         
@@ -202,14 +202,14 @@ public class TileManager : MonoBehaviour {
         }
     }//Sorts Hand.... Initializing this at start but add as a button later to re-sort if player manually sorts and changes mind.
 
-    public Tile DrawTiles(List<Tile> wall) //This method will be reused for both player and A.I. interactions, to be implemented in Phase 2.
+    public Tile DrawTiles() //This method will be reused for both player and A.I. interactions, to be implemented in Phase 2.
     {
-        if(wall.Count == 0) 
+        if(TileWall.Count == 0) 
         { 
             return null;    
         }
-        Tile drawnTile = wall[0];
-        wall.RemoveAt(0);
+        Tile drawnTile = TileWall[0];
+        TileWall.RemoveAt(0);
         return drawnTile;
     }
 
